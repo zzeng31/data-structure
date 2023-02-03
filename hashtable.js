@@ -33,9 +33,33 @@ class HashTable {
     }
     return undefined;
   }
+  keys() {
+    if (!this.data.length) {
+      return undefined;
+    }
+    let allKeys = [];
+    // loop through all the elements
+    for (let i = 0; i < this.data.length; i++) {
+      // if it's not an empty memory cell
+      if (this.data[i] && this.data[i].length) {
+        // but also loop through all the potential collisions
+        if (this.data.length > 1) {
+          for (let j = 0; j < this.data[i].length; j++) {
+            allKeys.push(this.data[i][j][0]);
+          }
+        } else {
+          allKeys.push(this.data[i][0]);
+        }
+      }
+    }
+    return allKeys;
+  }
 }
 
 const myHashTable = new HashTable(50);
 myHashTable.set("grapes", 10000);
-
-console.log(myHashTable.get("grapes"));
+myHashTable.set("apples", 10000);
+myHashTable.set("oranges", 10000);
+myHashTable.set("banana", 10000);
+myHashTable.keys();
+console.log(myHashTable.keys());
